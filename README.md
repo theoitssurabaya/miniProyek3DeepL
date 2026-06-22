@@ -1,33 +1,42 @@
-# ATM Python Eye (OWL-ViT Local Demo)
+# ATM Custom Smart Eye (YOLOv8)
 
-Strong Python script using massive OWL-ViT brain for tribe ATM security. This project uses the device camera to directly detect faces, masks, hats, and sunglasses without any web browser.
+Fast, custom brain for ATM security. Uses a lightweight YOLOv8 model trained to detect faces, masks, hats, and sunglasses to prevent hidden faces during transactions.
 
 ## How Brain Works (Logic)
-Instead of relying on web frameworks and smaller heuristic models, we use a single, huge zero-shot vision transformer:
 
-* **OWL-ViT (`google/owlvit-base-patch32`)**: A zero-shot text-conditioned object detection model from Hugging Face Transformers.
+We trained a custom YOLOv8 model for this task.
+* **YOLOv8**: Extremely fast object detection model, perfect for hardware with limited power like ATMs.
+* **Custom Dataset**: Brain was fed thousands of pictures of masks, hats, and sunglasses from Kaggle to learn its specific job.
 
 **The "Why"**:
-We just prompt the brain with texts like "a face", "a medical mask", "a hat", "sunglasses". The brain understands these concepts without explicit custom training. Running it natively in Python allows us to utilize PC hardware directly, completely removing the browser. However, because the brain is massive, if the PC does not have a strong GPU, the framerate will be extremely slow.
+We need speed. By gathering our own dataset and training a lightweight YOLO model, we get instant "DANGER" or "SAFE" signals without lag on edge devices.
 
 ## Installation & Setup
 
-1. Open terminal in the project directory.
-2. Create a virtual environment:
+1. Create a virtual environment:
    ```bash
    python3 -m venv venv
    source venv/bin/activate
    ```
-3. Install dependencies:
+2. Install dependencies (requires ultralytics for YOLO):
    ```bash
-   pip install -r requirements.txt
+   pip install ultralytics opencv-python
    ```
+3. Prepare Data:
+   Download the Kaggle dataset (Face Coverings & Accessories) in YOLO format and place it in the `dataset/` directory.
 
 ## Usage
-1. Activate the virtual environment if not already active (`source venv/bin/activate`).
-2. Run the script:
-   ```bash
-   python owl_demo.py
-   ```
-3. An OpenCV window will open showing the camera feed.
-4. Put on a mask, hat, or sunglasses to trigger the DANGER alert on screen.
+
+### 1. Teach Brain (Training)
+Run the training script to cook the baby YOLO model:
+```bash
+python train_yolo.py
+```
+This saves the smart brain weights into `runs/detect/train/weights/best.pt`.
+
+### 2. Test Magic Eye (Inference)
+Open webcam and test the security system:
+```bash
+python atm_yolo_eye.py
+```
+Put on a hat or mask to trigger the red DANGER alert.

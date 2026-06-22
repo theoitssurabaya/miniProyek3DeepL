@@ -9,3 +9,9 @@ venv/
 .vscode/
 .idea/
 .DS_Store
+
+# YOLO Data and Models
+dataset/
+runs/
+*.pt
+yolov8n.pt
