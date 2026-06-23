@@ -1,5 +1,2 @@
-torch
-transformers
-opencv-python
-Pillow
 ultralytics
+opencv-python

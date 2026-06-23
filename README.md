@@ -13,17 +13,39 @@ We need speed. By gathering our own dataset and training a lightweight YOLO mode
 
 ## Installation & Setup
 
-1. Create a virtual environment:
+You must build the Python environment before cooking the brain. Here are the steps for your operating system.
+
+### For Ubuntu (Linux)
+
+1. Open your terminal.
+2. Create and wake up the virtual environment:
    ```bash
    python3 -m venv venv
    source venv/bin/activate
    ```
-2. Install dependencies (requires ultralytics for YOLO):
+3. Install the tools:
    ```bash
-   pip install ultralytics opencv-python
+   pip install -r requirements.txt
    ```
-3. Prepare Data:
-   Download the Kaggle dataset (Face Coverings & Accessories) in YOLO format and place it in the `dataset/` directory.
+
+### For Windows
+
+1. Open Command Prompt or PowerShell.
+2. Create and wake up the virtual environment:
+   ```cmd
+   python -m venv venv
+   .\venv\Scripts\activate
+   ```
+3. Install the tools:
+   ```cmd
+   pip install -r requirements.txt
+   ```
+
+## Prepare Data
+1. Download the dataset (Face Coverings & Accessories) in YOLOv8 format from Kaggle.
+2. Unpack the zip file.
+3. Put the folders (`train`, `valid`) and `data.yaml` inside a new `dataset/` directory in this project.
+4. Open `dataset/data.yaml` and make sure the `path` points to the absolute path of your dataset directory.
 
 ## Usage
 
@@ -32,11 +54,13 @@ Run the training script to cook the baby YOLO model:
 ```bash
 python train_yolo.py
 ```
-This saves the smart brain weights into `runs/detect/train/weights/best.pt`.
+* **Logic**: This feeds all your pictures to the YOLO model for 20 epochs. A strong GPU will make this fast.
+* This saves the smart brain weights into `runs/detect/train/weights/best.pt`.
 
 ### 2. Test Magic Eye (Inference)
 Open webcam and test the security system:
 ```bash
 python atm_yolo_eye.py
 ```
-Put on a hat or mask to trigger the red DANGER alert.
+* **Logic**: The magic eye (webcam) takes pictures and the trained YOLO brain draws boxes.
+* Put on a hat, mask, or sunglasses to trigger the red "DANGER" alert. Show a bare face to see the green "SAFE" alert.
