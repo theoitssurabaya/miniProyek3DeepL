@@ -10,8 +10,7 @@ venv/
 .idea/
 .DS_Store
 
-# YOLO Data and Models
-dataset/
+# YOLO Models
 runs/
 *.pt
 yolov8n.pt

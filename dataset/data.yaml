@@ -1,0 +1,11 @@
+path: /home/theo/Documents/miniProyek3DeepL/dataset
+train: train/images
+val: valid/images
+test: test/images
+
+names: 
+  0: cap
+  1: mask
+  2: person
+  3: scarf-kerchief
+  4: sunglasses
